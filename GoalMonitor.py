@@ -20,20 +20,14 @@ class GoalMonitor:
         if self.recalculate:
             self.lastTime = perception[AgentConsts.TIME]
             return True
-        if perception[AgentConsts.LIFE_X] != -1 and perception[AgentConsts.LIFE_Y] != -1 and perception[AgentConsts.HEALTH] < 3:
+        if perception[AgentConsts.LIFE] < 2:
             self.recalculate = True
             return True
-        if perception[AgentConsts.NEIGHBORHOOD_DOWN] == AgentConsts.PLAYER or perception[AgentConsts.NEIGHBORHOOD_DOWN] == AgentConsts.OTHER or perception[AgentConsts.NEIGHBORHOOD_DOWN] == AgentConsts.PLAYER or perception[AgentConsts.NEIGHBORHOOD_DOWN] == AgentConsts.OTHER or perception[AgentConsts.NEIGHBORHOOD_RIGHT] == AgentConsts.PLAYER or perception[AgentConsts.NEIGHBORHOOD_RIGHT] == AgentConsts.OTHER or perception[AgentConsts.NEIGHBORHOOD_LEFT] == AgentConsts.PLAYER or perception[AgentConsts.NEIGHBORHOOD_LEFT] == AgentConsts.OTHER:
-            self.recalculate = True
-            return True
-        if perception[AgentConsts.NEIGHBORHOOD_DOWN] == AgentConsts.SHELL or perception[AgentConsts.NEIGHBORHOOD_UP] == AgentConsts.SHELL or perception[AgentConsts.NEIGHBORHOOD_LEFT] == AgentConsts.SHELL or perception[AgentConsts.NEIGHBORHOOD_RIGHT] == AgentConsts.SHELL:
-            self.recalculate = True
-            return True
-        if AgentConsts.TIME - self.lastTime < 5:
-            self.recalculate = True
-            return True
+        time = 0
+        
         #Es necesario recalcular  siempre? 
         #TODO definir la estrategia de cuando queremos recalcular
+        #Poner un self.target y ahi meter a donde voy a ir y luego en selectGoal ya lo pongo bien
         #puede ser , por ejemplo cada cierto tiempo o cuanod tenemos poca vida.
         #cada cierto tiempo, poca vida -> buscar vida, si jugador cera -> disparar jugador, si bala cerca -> esquivar, si nada de eso -> ir a command center
         return False
